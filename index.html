@@ -1,124 +1,578 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="protofolio.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malek Mohammed | software engineer</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Malek Mohammed - Software Engineer | Building the Future"/>
+  <link rel="icon" href="ChatGPT Image Nov 9, 2025, 12_08_08 AM.png" type="image/jpeg">
+  <title>Malek Mohammed | Software Engineer</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Typed.js -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <style>
+    html{
+        scroll-behavior: smooth;
+    }
+    :root {
+      --bg: #0a0a0a;
+      --bg-light: #111;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #8b5cf6;
+      --accent-hover: #a78bfa;
+      --card: rgba(30, 30, 46, 0.7);
+      --border: rgba(139, 92, 246, 0.2);
+      --glass: rgba(255, 255, 255, 0.05);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-light: #f1f5f9;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --accent: #7c3aed;
+      --accent-hover: #6d28d9;
+      --card: rgba(255, 255, 255, 0.9);
+      --border: rgba(124, 58, 237, 0.15);
+      --glass: rgba(255, 255, 255, 0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: all 0.4s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Theme Toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      z-index: 1000;
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 0.6rem;
+      border-radius: 50%;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, var(--accent) 0%, transparent 70%);
+      opacity: 0.1;
+      z-index: -1;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--accent), #c4b5fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .typed-text {
+      font-size: 1.5rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin: 1rem 0;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+      border: 2px solid transparent;
+    }
+
+    .btn:hover {
+      background: transparent;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 0;
+      z-index: 999;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
+
+    nav.scrolled {
+      background: var(--glass);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -6px;
+      left: 0;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Section */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title span {
+      background: linear-gradient(90deg, var(--accent), #ddd6fe);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+    }
+
+    .about-text strong {
+      color: var(--accent);
+    }
+
+    .about-image {
+      text-align: center;
+    }
+
+    .about-image img {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--accent);
+      box-shadow: 0 0 40px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Skills */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .skill-card {
+      background: var(--card);
+      padding: 1.8rem;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+    }
+
+    .skill-name {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .skill-bar {
+      height: 8px;
+      background: var(--bg-light);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+      width: 0;
+      border-radius: 4px;
+      transition: width 1.5s ease-out;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.4s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .project-card:hover {
+      transform: translateY(-12px);
+    }
+
+    .project-img {
+      height: 180px;
+      background: linear-gradient(45deg, #1e293b, #334155);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 3rem;
+    }
+
+    .project-info {
+      padding: 1.5rem;
+    }
+
+    .project-info h3 {
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      background: rgba(139, 92, 246, 0.2);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-light);
+      padding: 4rem 0;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .social-links a {
+      color: var(--text-muted);
+      font-size: 1.6rem;
+      margin: 0 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.8rem; }
+      .about-grid { grid-template-columns: 1fr; text-align: center; }
+      .about-image img { width: 200px; height: 200px; }
+      .nav-links { gap: 1.5rem; font-size: 0.9rem; }
+    }
+  </style>
 </head>
-<body>
-    <header class="sthead" id = "head-bar">
-        <section class="stl">
-            <h1 id="header-text" class="proto"> PORTOFOLIO </h1>
-                <button class="bttn">
-                    <div class="icon"></div>
-                </button>
-        </section>
+<body data-theme="dark">
 
-        <div id="scroll"></div>
-        <div id="scrollprogg"></div>
+  <!-- Theme Toggle -->
+  <div class="theme-toggle" onclick="toggleTheme()">
+    <i class="fas fa-moon"></i>
+  </div>
 
-        <nav class="firstnav">
-          <ul>
-              <li><a id="nav"href="www.google.com">projects</a></li>
-              <li><a id="nav1" href="#tools">tools</a></li>
-              <li><a id="nav2" href="#end">contact</a></li>
-              <button id="nav3" class="bt1"> <i class="fa-solid fa-sun" id="blc"></i> </button>
-          </ul>
-        </nav>      
-    </header>
-
-    <section class="about" id="sc1">
-        <h1> Hey, I'm Malek</h1>
-        <p>Software Engineer</p>
-    </section>
-  
-
-    <a class="aboutbutton" href="#fa-cod"> <i class="fa-solid fa-arrow-down"> </i> </a>
-
-    <i class="fa-solid fa-code" id="fa-cod"></i>
-<section>
-    <section id="aboutme" class="mes hide">
-        <h1 class="me">About Me:</h1>
-        <p>Hey! I'm Malek, a software engineer that specialises in full-stack web development , application development and AI engineering soon! I spent 5 years learning programming with it's methods to satisfy the Client's needs and to deilever my services in the highest quality there could be!</p>
-    </section>
-
-    <section  id="aboutme1" class="jobs hide">
-        <h1 class="jbs">Experience:</h1>
-        <p>I have many experiences in many teams and as a freelancer where I worked as: IT vice president, fullstack developer, application developer, backend-developer  </p>
-    </section>
-
-    <section  id="aboutme2" class="skills hide">
-        <h1 class="skls">Skills:</h1>
-        <ul>
-            <li>programming language fluency </li>
-            <li>multiple speaking languages</li>
-            <li>Excellent debugging</li>
-            <li>syntax memorizing</li>
-            <li>creative thinking</li>
-            <li>problem solving</li>
-            <li>communication</li>
-            <li>mathematics</li>
-            <li>logic</li>
-        </l>
-    </section>
-
-
-    <h1 class="tooling" id="tools"> Tooling </h1>
-
-    <div class="toolbox"> 
-        <div class="content">
-            <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-python"> python </i></div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-js"> Javascript</i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-solid fa-c"></i> ++ </i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-java">Java</i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-html5"> HTML</i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-css3-alt"> CSS </i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-php"> PHP </i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-react"> React.js </i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-node-js"> Node.js</i></div>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-brands fa-node-js"> Express.js</i>
-                </div>
-                <div class="box-content">
-                    <div class="item-icon icon-name"><i class="fa-solid fa-flask"> Flask</i></div>
-                </div>
-                </div>
-            </div>
-        </div>
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
-</section>
+  </nav>
 
-<footer>
-    <div class="footer-content">
-        <h3>Contact Me</h3>
-        <p>Feel free to reach out to me for any inquiries or collaborations!</p>
-        <ul id ="end" class="socials">
-            <li><a href="https://www.linkedin.com/in/malek-mohammed-307263264/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
-            <li><a href="https://www.facebook.com/malek.kolasa/" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
-            <li><a href="https://www.instagram.com/malek_mohammed__/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
-            <li><a href="https://github.com/malek200-mohammed" target="_blank"><i class="fa-brands fa-github"></i></a></li>
-            <li><a href="https://github.com/malek200-mohammed" target="_blank"><i class="fa-brands fa-mail"></i></a></li>
-</footer>
+  <!-- Hero -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Hey, I'm Malek</h1>
+        <div class="typed-text" id="typed"></div>
+        <p>
+         Hey! I'm Malek, a software engineer that specialises in full-stack web development , application development and <strong>AI engineering soon</strong>
+        </p>
+        <a href="#contact" class="btn">Let's Talk</a>
+      </div>
+    </div>
+  </section>
 
-    <script src="protofolio.js"> </script>    
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title"><span>About Me</span></h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a <strong>passionate Software Engineer</strong> with <strong>6 years</strong> of experience building production-grade applications. 
+            From leading IT teams as <strong>Vice President</strong> to delivering pixel-perfect freelance projects, I focus on clean architecture, performance, user experience and client satisfaction.
+          </p>
+          <p style="margin-top: 1rem;">
+            Currently exploring <strong>AI/ML integration</strong> to build intelligent, data-driven systems. I speak code fluently — and 2 human languages too.
+          </p>
+        </div>
+        <div class="about-image">
+          <img src="WhatsApp Image 2025-11-08 at 10.16.10 PM.jpeg" alt="Malek Mohammed">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" style="background: var(--bg-light);">
+    <div class="container">
+      <h2 class="section-title"><span>Skills & Expertise</span></h2>
+      <div class="skills-container">
+        <div class="skill-card">
+          <div class="skill-name">JavaScript / TypeScript <span>92%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 92%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">React.js <span>90%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Node.js / Express <span>88%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 88%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Python / Flask <span>85%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 85%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Java & C++ <span>80%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 80%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">AI / ML Basics <span>45%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 65%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">Leadership <span>95%</span></div>
+          <div class="skill-bar"><div class="skill-progress" style="width: 95%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="skill-name">
+            I have many experiences in many teams and as a freelancer where I worked as: IT vice president, fullstack developer, application developer, backend-developer<span></span></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title"><span>Featured Projects</span></h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-img"><i class="fas fa-robot"></i></div>
+          <div class="project-info">
+            <h3>AI Chat Assistant</h3>
+            <p>Real-time chatbot with NLP, powered by Flask + OpenAI API.</p>
+            <div class="project-tags">
+              <span class="tag">Python</span>
+              <span class="tag">Flask</span>
+              <span class="tag">AI</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-img"><i class="fas fa-shopping-cart"></i></div>
+          <div class="project-info">
+            <h3>E-Commerce Platform</h3>
+            <p>Full-stack marketplace with React, Node.js, Stripe & MongoDB.</p>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">MongoDB</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-img"><i class="fas fa-chart-line"></i></div>
+          <div class="project-info">
+            <h3>Analytics Dashboard</h3>
+            <p>Real-time data visualization with D3.js and WebSockets.</p>
+            <div class="project-tags">
+              <span class="tag">D3.js</span>
+              <span class="tag">WebSocket</span>
+              <span class="tag">Express</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="container">
+      <p>&copy; 2025 Malek Mohammed. Built with <i class="fas fa-heart" style="color: #e11d48;"></i> and code.</p>
+      <div class="social-links">
+        <a href="https://github.com/malek200-mohammed" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/malek-mohammed-307263264/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="malekmohammed690@gmail.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle
+    function toggleTheme() {
+      const body = document.body;
+      const current = body.getAttribute('data-theme');
+      const newTheme = current === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      document.querySelector('.theme-toggle i').classList.toggle('fa-moon');
+      document.querySelector('.theme-toggle i').classList.toggle('fa-sun');
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+    if (savedTheme === 'light') {
+      document.querySelector('.theme-toggle i').classList.replace('fa-moon', 'fa-sun');
+    }
+
+    // Typed.js
+    new Typed('#typed', {
+      strings: ['Software Engineer','Full-Stack Developer', 'Problem Solver', 'Team Leader'],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 1500,
+      loop: true
+    });
+
+    // Nav scroll effect
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Animate skill bars on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.skill-progress').forEach(bar => {
+            bar.style.width = bar.parentElement.previousElementSibling.querySelector('span').textContent;
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.skills-container').forEach(container => {
+      observer.observe(container);
+    });
+  </script>
+
 </body>
 </html>
